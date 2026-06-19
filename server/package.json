@@ -1,13 +1,20 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Backend",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
+  },
+  "repository":{
+    "type": "git",
+    "url": "https://github.com/Winsali2123/Task-Manager-Full-Stack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Winsali2123/Task-Manager-Full-Stack/issues"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ali",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
