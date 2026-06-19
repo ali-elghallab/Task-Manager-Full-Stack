@@ -16,6 +16,24 @@ const register = async(req, res) => {
     });
 };
 
-const login = async(req, res)
+const login = async(req, res) => {
+    const {email, password} = req.body;
+    const user = await findUserByEmail(email);
+    if(!user) {
+        return res.status(400).json({
+            message:"Utilisateur introuvable"
+        });
+    }
 
-module.exports = {register};
+    if(user.password !== password) {
+        return res.status(400).json({
+            message:"Mot de passe incorrect"
+        });
+    }
+
+    res.status(200).json({
+        message:"Connexion reussie"
+    });
+};
+
+module.exports = {register, login};
