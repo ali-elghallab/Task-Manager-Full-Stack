@@ -21,9 +21,9 @@ const deleteTask = async(id) => {
 };
 
 //Fonction pour modifier une Task
-const updateTask = async(id, title, description, status, priority) => {
+const updateTask = async(id, title, description, status, priority, dueDate) => {
     await sql.query
-        'UPDATE Tasks SET title = ${title}, description = ${description}, status = ${status}, priority = ${priority} WHERE id = ${id}';
+        'UPDATE Tasks SET title = ${title}, description = ${description}, status = ${status}, priority = ${priority}, dueDate = ${dueDate} WHERE id = ${id}';
 };
 
 module.exports = {
