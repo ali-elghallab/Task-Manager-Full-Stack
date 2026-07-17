@@ -1,13 +1,9 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-
-
 import { Routes, Route } from 'react-router-dom'
 import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
 import Dashboard from './pages/Dashboard.jsx'
+import ProtectedRoute from './components/protectedRoute.jsx'
 
 function App() {
   return (
@@ -23,13 +19,17 @@ function App() {
       />
 
       <Route 
-        path='/Register'
+        path='/register'
         element={<Register />}
       />
 
       <Route 
-        path='/Dashboard'
-        element={<Dashboard />}
+        path='/dashboard'
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
       />
     </Routes>
   );

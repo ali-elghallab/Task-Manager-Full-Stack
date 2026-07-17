@@ -1,6 +1,16 @@
+import { Link } from "react-router-dom";
+
 function Register() {
     return (
-        <h1>Register Page</h1>
+        <div>
+            <h1>Inscription</h1>
+            <p>
+                vous avez un compte ?
+                <Link to="/login">
+                    Se connecter
+                </Link>
+            </p>
+        </div>
     );
 }
 
