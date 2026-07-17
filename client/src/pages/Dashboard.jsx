@@ -1,19 +1,25 @@
-import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import TaskForm from "../components/TaskForm";
+import TaskList from "../components/TaskList";
+import api from "../services/api";
 
 function Dashboard() {
-    const navigate = useNavigate();
-    function logout(){
-        localStorage.removeItem("token");
-        navigate("/login");
+    async function getTasks(){
+        try{
+            const reponse = await api.get("/tasks");
+            console.log(Response.data);
+        }
+        catch(error){
+            console.log(error);
+        }
     }
-
+    
     return (
-        <div>
-            <h1>Home page</h1>
-            <button onClick={logout}>
-                Déconexiion
-            </button>
-        </div>
+        <>
+            <Navbar />
+            <TaskForm />
+            <TaskList />
+        </>
     );
 }
 
