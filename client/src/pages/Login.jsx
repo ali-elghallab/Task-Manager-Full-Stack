@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Register from "./Register";
 import api from "../services/api";
 import { useContext } from "react";
@@ -12,7 +11,9 @@ function Login() {
     const { setToken } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    async function handleSubmit(){
+    async function handleSubmit(e){
+        e.preventDefault();
+        
         try{
             const response = await api.post(
                 "/login",

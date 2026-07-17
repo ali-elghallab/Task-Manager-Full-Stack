@@ -1,10 +1,18 @@
-function TaskCard(){
+function TaskCard({ task, onEdit, onDelete }){
     return(
         <div>
-            <h3>Titre de la tache</h3>
-            <p>Description</p>
-            <button>Modifier</button>
-            <button>Supprimer</button>
+            <h3>{task.titke}</h3>
+            <p>{task.description}</p>
+            <p>{task.status}</p>
+            <p>{task.priority}</p>
+
+            <button onClick={() => onEdit(task)}>
+                Modifier
+            </button>
+
+            <button onClick={() => onDelete(task.id)}>
+                Supprimer
+            </button>
         </div>
     );
 }

@@ -1,11 +1,16 @@
 import TaskCard from "./TaskCard"
 
-function TaskList(){
+function TaskList({ tasks, onEdit, onDelete }){
     return (
         <div>
-            <TaskCard />
-            <TaskCard />
-            <TaskCard />
+            {tasks.map((task) => (
+                <TaskCard
+                    key={task.id}
+                    task={task}
+                    onEdit={onEdit}
+                    onDelete={onDelete}
+                />
+            ))}
         </div>
     );
 }
