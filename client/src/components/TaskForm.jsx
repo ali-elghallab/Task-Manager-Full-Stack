@@ -24,7 +24,7 @@ function TaskForm({ onTaskCreated, editingTask, setEditingTask }){
         try{
 
             const { token } = useContext(AuthContext);            
-            /*Cette ligne récupère le JWT.
+            /*Cette ligne récuplère le JWT.
             Parce que la route est protégée.
             router.post(
                 "/tasks",
@@ -87,7 +87,7 @@ function TaskForm({ onTaskCreated, editingTask, setEditingTask }){
             >
                 <option>À faire</option>
                 <option>En cours</option>
-                <option>Terminé</option>
+                <option>Terminée</option>
             </select>
             <select
                 value={priority} 
