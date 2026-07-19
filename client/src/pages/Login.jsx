@@ -35,29 +35,30 @@ function Login() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input 
-                type="email" 
-                placeholder="email" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)}                 />
-            <input 
-                type="password" 
-                placeholder="Mot de passe" 
-                value={passwordassword} 
-                onChange={(e) => setPassword(e.target.value)}
-            />
+        <div className="flex">
+            <form onSubmit={handleSubmit}>
+                <input 
+                    type="email" 
+                    placeholder="email" 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)}                 />
+                <input 
+                    type="password" 
+                    placeholder="Mot de passe" 
+                    value={passwordassword} 
+                    onChange={(e) => setPassword(e.target.value)}
+                />
 
-            <button>Connexion</button>
+                <button>Connexion</button>
 
-            <p>
-                vous n'avez pas de compte ?
-                <Link to="/register">
-                    Créer un compte
-                </Link>
-            </p>                
-        </form>
-
+                <p>
+                    vous n'avez pas de compte ?
+                    <Link to="/register">
+                        Créer un compte
+                    </Link>
+                </p>                
+            </form>
+        </div>
             
     );
 }

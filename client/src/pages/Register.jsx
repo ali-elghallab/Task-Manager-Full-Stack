@@ -9,7 +9,7 @@ function Register() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault();
 
         if ( password != confirmPassword) {

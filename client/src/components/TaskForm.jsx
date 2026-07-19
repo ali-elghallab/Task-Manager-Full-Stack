@@ -3,7 +3,6 @@ import api from "../services/api";
 import AuthContext from "../context/AuthContext";
 
 function TaskForm({ onTaskCreated, editingTask, setEditingTask }){
-    const [editingTask, setEditingTask] = useState(null);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [status, setStatus] = useState("À faire");
