@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import TaskList from "../components/TaskList";
 import TaskForm from "../components/TaskForm";
+import DashboardStats from "../components/DashboardStats";
 import api from "../services/api";
 
 function Dashboard() {
@@ -150,7 +151,9 @@ function Dashboard() {
                 onDelete={deleteTask}
             /> 
 
-            
+            <DashboardStats
+                tasks={tasks}
+            />            
         </>
         //On transmet donc les tâches via une prop.
     );
