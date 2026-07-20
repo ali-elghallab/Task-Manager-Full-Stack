@@ -7,31 +7,37 @@ import ProtectedRoute from './components/protectedRoute.jsx'
 
 function App() {
   return (
-    <Routes>
-      <Route 
-        path='/'
-        element={<Login />}
-      />
+    <div>
+      <Routes>
+        <Route 
+          path='/'
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
 
-      <Route 
-        path='/login'
-        element={<Login />}
-      />
+        <Route 
+          path='/login'
+          element={<Login />}
+        />
 
-      <Route 
-        path='/register'
-        element={<Register />}
-      />
+        <Route 
+          path='/register'
+          element={<Register />}
+        />
 
-      <Route 
-        path='/dashboard'
-        element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        }
-      />
-    </Routes>
+        <Route 
+          path='/dashboard'
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </div>
   );
 }
 

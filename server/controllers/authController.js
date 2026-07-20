@@ -4,7 +4,6 @@ const { createUser, findUserByEmail } = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 
 const bcrypt = require("bcrypt");
-const hashedPassword = await bcrypt.hash(password, 10);
 
 const register = async(req, res) => {
     const {name, email, password } = req.body;
@@ -14,6 +13,8 @@ const register = async(req, res) => {
             message:"Email deja utilise"
         });
     }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     await createUser(name, email, hashedPassword);
 

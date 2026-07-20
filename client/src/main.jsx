@@ -8,9 +8,11 @@ import "./index.css"
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
+  
     <AuthProvider>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </AuthProvider>
-  </BrowserRouter>,
+  
 );

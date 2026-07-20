@@ -3,10 +3,16 @@ const { connectDB } = require("./config/db.js");
 const app = express();    //Cree serveur
 const authRoutes = require("./routes/authRoutes.js");    // authRoutes pas besoin d'accolades car on recupere directement l'objet exporte
 const taskRoutes = require("./routes/taskRoutes.js");
+const cors = require("cors");
+
+app.use(cors({
+    origin: 'http://localhost:5173'
+}));
+
+app.use(express.json());
 
 app.use("/api", authRoutes);
 app.use("/api", taskRoutes);
-app.use(express.json());
 
 connectDB();
 

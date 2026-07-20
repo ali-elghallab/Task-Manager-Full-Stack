@@ -3,6 +3,16 @@ import api from "../services/api";
 import AuthContext from "../context/AuthContext";
 
 function TaskForm({ onTaskCreated, editingTask, setEditingTask }){
+
+    const { token } = useContext(AuthContext);            
+            /*Cette ligne récuplère le JWT.
+            Parce que la route est protégée.
+            router.post(
+                "/tasks",
+                authMiddleware,  Le middleware vérifie, si valide on crée la tache
+                createTask
+            ); */
+    
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [status, setStatus] = useState("À faire");
@@ -21,24 +31,23 @@ function TaskForm({ onTaskCreated, editingTask, setEditingTask }){
         e.preventDefault();   //lorsqu'un formulaire est envoyé, le navigateur recharge la page
 
         try{
-
-            const { token } = useContext(AuthContext);            
-            /*Cette ligne récuplère le JWT.
-            Parce que la route est protégée.
-            router.post(
-                "/tasks",
-                authMiddleware,  Le middleware vérifie, si valide on crée la tache
-                createTask
-            ); */
             
             if(editingTask){
                 await api.put(
-                    "/tasks/${editingTask.id}",
+                    `/tasks/${editingTask.id}`,
                     {
                         title,
                         description,
                         status,
                         priority
+                    },
+                    {
+
+                        headers:{
+
+                            Authorization:`Bearer ${token}`
+
+                        }
                     }
                 );
             } else {
