@@ -32,13 +32,15 @@ const addTask = async(req, res) => {
             description,
             status,
             priority,
-            dueDate
+            dueDate,
+            userId
         );
         res.status(201).json({
             message: "Task created successfully"
         });
     } catch(err){
-        res.status(501).json({
+        console.log(err);
+        res.status(500).json({
             message: err.message
         });
     }

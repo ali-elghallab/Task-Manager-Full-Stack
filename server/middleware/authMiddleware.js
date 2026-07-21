@@ -2,10 +2,13 @@ const jwt = require("jsonwebtoken");
 
 const authMiddleware = (req, res, next) => {
     
+    console.log("Headers :", req.headers);
+    console.log("Authorization :", req.headers.authorization);
+    
     const authHeader = req.headers.authorization;
 
     if(!authHeader) {
-        return resizeBy.status(401).json({
+        return res.status(401).json({
             message: "Token manquant"
         });
     }
@@ -22,8 +25,9 @@ const authMiddleware = (req, res, next) => {
         req.user = decoded;
         next();
     }catch(err){
+        console.log(err);
         return res.status(401).json({
-            message: "Token invalide"
+            message: err.message
         });
     }
 };

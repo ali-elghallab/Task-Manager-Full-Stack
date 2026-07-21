@@ -1,9 +1,9 @@
 const { sql } = require("../config/db");
 
 //Fonction pour cree une Task dans la BDD
-const createTask = async(title, description, status, priority, dueDate) => {
+const createTask = async(title, description, status, priority, dueDate, userId) => {
     const result = await sql.query
-        `INSERT INTO Tasks(title, description, status, priority, dueDate) VALUES(${title}, ${description}, ${status}, ${priority}, ${dueDate})`
+        `INSERT INTO Tasks(title, description, status, priority, dueDate, userId) VALUES(${title}, ${description}, ${status}, ${priority}, ${dueDate}, ${userId})`
     ;
     return result;
 };
@@ -24,9 +24,9 @@ const deleteTask = async(id) => {
 };
 
 //Fonction pour modifier une Task
-const updateTask = async(id, title, description, status, priority, dueDate) => {
+const updateTask = async(id, title, description, status, priority) => {
     await sql.query
-        `UPDATE Tasks SET title = ${title}, description = ${description}, status = ${status}, priority = ${priority}, dueDate = ${dueDate} WHERE id = ${id}`
+        `UPDATE Tasks SET title = ${title}, description = ${description}, status = ${status}, priority = ${priority} WHERE id = ${id}`
     ;
 };
 
