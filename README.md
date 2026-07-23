@@ -19,9 +19,9 @@
 
 ## 📸 Screenshots
 
-| Login | Dashboard |
-|-------|-----------|
-| ![Login](<lien-screenshot-login>) | ![Dashboard](<lien-screenshot-dashboard>) |
+| Register| Login | Dashboard |
+|---------|-------|-----------|
+| ![Register](screenshots/RegisterPage.png) | ![Login](screenshots/LoginPage.png) | ![Dashboard](screenshots/DashboardPage.png) |
 
 ---
 
@@ -199,10 +199,10 @@ npm start
 **Ali El Ghallab**
 
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ali-elghallab)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/<ton-linkedin>)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ali-el-ghallab/)
 
 ---
 
 <div align="center">
-  <sub>Projet réalisé dans le cadre d'un portfolio étudiant — Licence Informatique S4</sub>
+  <sub>Projet réalisé dans le cadre d'un portfolio étudiant</sub>
 </div>
