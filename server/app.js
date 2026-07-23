@@ -19,6 +19,8 @@ connectDB();
 app.get("/", (req, res) => {     //req: contient infos de client et res: permet d'envoyer une reponse
     res.send("Hello");          
 });
-app.listen(5000, () => {             //Demarrer le serveur
-    console.log("Server running in port 5000");
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {             //Demarrer le serveur
+    console.log(`Server running in port ${PORT}`);
 });
