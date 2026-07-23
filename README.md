@@ -21,7 +21,7 @@
 
 | Register| Login | Dashboard |
 |---------|-------|-----------|
-| ![Register](screenshots/RegisterPage.png) | ![Login](screenshots/LoginPage.png) | ![Dashboard](screenshots/DashboardPage.png) |
+| ![Register](screenshots/RegisterPage.PNG) | ![Login](screenshots/LoginPage.PNG) | ![Dashboard](screenshots/DashboardPage.PNG) |
 
 ---
 
