@@ -11,7 +11,7 @@
 ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-[🚀 Voir la démo](task-manager-aliegh.vercel.app) · [🐛 Signaler un bug](https://github.com/ali-elghallab/Task-Manager-Full-Stack/issues)
+[🚀 Voir la démo](https://task-manager-aliegh.vercel.app) · [🐛 Signaler un bug](https://github.com/ali-elghallab/Task-Manager-Full-Stack/issues)
 
 </div>
 
