@@ -6,7 +6,14 @@ const taskRoutes = require("./routes/taskRoutes.js");
 const cors = require("cors");
 
 app.use(cors({
-    origin: 'http://localhost:5173'
+    origin: [
+        'http://localhost:5173',
+        'http://localhost:3000',
+        'https://task-manager-sand-nine-36.vercel.app',  // ← ton frontend Vercel
+        'https://task-manager-aliegh.vercel.app'
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
@@ -20,7 +27,13 @@ app.get("/", (req, res) => {     //req: contient infos de client et res: permet 
     res.send("Hello");          
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {             //Demarrer le serveur
-    console.log(`Server running in port ${PORT}`);
-});
+// ✅ Exporter pour Vercel (serverless)
+module.exports = app;
+
+// ✅ Garder listen pour le développement local
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+        console.log(`Server running in port ${PORT}`);
+    });
+}
