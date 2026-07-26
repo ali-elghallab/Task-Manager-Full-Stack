@@ -1,26 +1,21 @@
 require("dotenv").config();
 
-const sql = require("mssql");      //Importer la bibliotheque mssql
+const { Pool } = require("pg");
 
-const config = {
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    server: process.env.DB_SERVER,
-    port: parseInt(process.env.DB_PORT),
-    database: process.env.DB_NAME,
-    options: {
-        encrypt: false,
-        trustServerCertificate: true
-    },
-};
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }    // obligatoire sur Render
+});
 
 const connectDB = async() => {
     try {
-        await sql.connect(config);
-        console.log("SQL Server connected");
+        await pool.query("SELECT NOW()");   // test de connexion
+        console.log("PostgreSQL connected");
     } catch(err) {
-        console.log("Erreur connexion SQL Server", err);
+        console.log("Erreur connexion PostgreSQL", err);
     }
 };
 
-module.exports = {connectDB, sql};
+const getPool = () => pool;
+
+module.exports = {connectDB, getPool};
