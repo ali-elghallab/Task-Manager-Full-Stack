@@ -5,8 +5,8 @@ const createTask = async(title, description, status, priority, dueDate, userId) 
     const pool = getPool();
     
     const result = await pool.query(
-        `INSERT INTO tasks(title, description, status, priority, dueDate, userId) VALUES($1, $2, $3, $4, $5) RETURNING *`,
-        [title, description, status, priority, userId]
+        `INSERT INTO tasks(title, description, status, priority, dueDate, userId) VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
+        [title, description, status, priority, dueDate, userId]
     );
     return result.rows[0];
 };
@@ -27,7 +27,7 @@ const deleteTask = async(id, userId) => {
     const pool = getPool();
 
     await pool.query(
-        `DELETE FROM tasks WHERE id = $1 AND userId = $2`
+        `DELETE FROM tasks WHERE id = $1 AND userId = $2`,
         [id, userId]
     );
 };
