@@ -1,12 +1,12 @@
 const { getPool } = require("../config/db");
 
 //Fonction pour cree une Task dans la BDD
-const createTask = async(title, description, status, priority, dueDate, userId) => {
+const createTask = async(title, description, status, priority, due_date, userId) => {
     const pool = getPool();
     
     const result = await pool.query(
-        `INSERT INTO tasks(title, description, status, priority, dueDate, userId) VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
-        [title, description, status, priority, dueDate, userId]
+        `INSERT INTO tasks(title, description, status, priority, due_date, userId) VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
+        [title, description, status, priority, due_date, userId]
     );
     return result.rows[0];
 };
@@ -16,7 +16,7 @@ const getTasksByUser = async(userId) => {
     const pool = getPool();
 
     const result = await pool.query(
-        `SELECT * FROM tasks WHERE userId = $1 ORDER BY dueDate DESC`,
+        `SELECT * FROM tasks WHERE userId = $1 ORDER BY due_date DESC`,
         [userId]
     );
     return result.rows;
