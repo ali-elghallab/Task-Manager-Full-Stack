@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import api from "../services/api";
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
+import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 
 function Login() {
     const [showPassword, setShowPassword] = useState(false);
@@ -83,9 +84,7 @@ function Login() {
                             Adresse email
                         </label>
                         <div className="relative">
-                            <span className="absolute text-slate-500 left-3 top-1/2 -translate-y-1/2">
-                                ✉
-                            </span>
+                            <Mail className="absolute text-slate-500 left-3 top-1/2 -translate-y-1/2 w-5 h-5" />
                             <input 
                                 className="w-full bg-[#0f1117] border border-[#2d3148] rounded-lg pl-9 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition-colors"
                                 type="email" 
@@ -106,9 +105,7 @@ function Login() {
                             Mot de passe
                         </label>
                         <div className="relative">
-                            <span className="absolute text-slate-500 left-3 top-1/2 -translate-y-1/2">
-                                🔒
-                            </span>
+                            <Lock className="absolute text-slate-500 left-3 top-1/2 -translate-y-1/2 w-5 h-5" />
                             <input 
                                 className="w-full bg-[#0f1117] border border-[#2d3148] rounded-lg pl-9 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition-colors"
                                 type={showPassword ? 'text' : 'password' } 
@@ -123,8 +120,12 @@ function Login() {
                             <button 
                                 type="button"
                                 onClick={() => setShowPassword(prev => !prev)}
-                                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors">
-                                {showPassword ? '🙈' : '👁' }
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-600 transition-colors">
+                                {showPassword ? (
+                                    <EyeOff className="w-5 h-5" />
+                                ) : (
+                                    <Eye className="w-5 h-5" />
+                                )}
                             </button>
                             
                         </div>

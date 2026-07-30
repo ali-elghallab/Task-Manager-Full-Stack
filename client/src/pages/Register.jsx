@@ -1,6 +1,13 @@
 import api from "../services/api";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import {
+    User,
+    Mail,
+    Lock,
+    Eye,
+    EyeOff
+} from "lucide-react";
 
 function Register() {
     const [name, setName] = useState("");
@@ -99,9 +106,7 @@ function Register() {
                             Nom complet
                         </label>
                         <div className="relative">
-                            <span className="absolute text-slate-500 left-3 top-1/2 -translate-y-1/2">
-                                ✉
-                            </span>
+                            <User className="absolute text-slate-500 left-3 top-1/2 -translate-y-1/2 w-5 h-5" />
                             <input 
                                 type="text" 
                                 placeholder="Nom complet" 
@@ -122,9 +127,7 @@ function Register() {
                             Adresse email
                         </label>
                         <div className="relative">
-                            <span className="absolute text-slate-500 left-3 top-1/2 -translate-y-1/2">
-                                ✉
-                            </span>
+                            <Mail className="absolute text-slate-500 left-3 top-1/2 -translate-y-1/2 w-5 h-5" />
                             <input 
                                 type="email" 
                                 placeholder="ali@example.com" 
@@ -145,9 +148,7 @@ function Register() {
                             Mot de passe
                         </label>
                         <div className="relative">
-                            <span className="absolute text-slate-500 left-3 top-1/2 -translate-y-1/2">
-                                ✉
-                            </span>
+                            <Lock className="absolute text-slate-500 left-3 top-1/2 -translate-y-1/2 w-5 h-5" />
                             <input 
                                 type="password" 
                                 placeholder="Mot de passe" 
@@ -168,9 +169,7 @@ function Register() {
                             Confirmer le mot de passe
                         </label>
                         <div className="relative">
-                            <span className="absolute text-slate-500 left-3 top-1/2 -translate-y-1/2">
-                                ✉
-                            </span>
+                            <Lock className="absolute text-slate-500 left-3 top-1/2 -translate-y-1/2 w-5 h-5" />
                             <input 
                                 type="password" 
                                 placeholder="Comfirmé le mot de passe" 
