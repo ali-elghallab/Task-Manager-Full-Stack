@@ -6,12 +6,23 @@ const taskRoutes = require("./routes/taskRoutes.js");
 const cors = require("cors");
 
 app.use(cors({
-    origin: [
-        'http://localhost:5173',
-        'http://localhost:3000',
-        'https://task-manager-sand-nine-36.vercel.app',  // ← ton frontend Vercel
-        'https://task-manager-aliegh.vercel.app'
-    ],
+    origin: (origin, callback) => {
+        // Autoriser requêtes sans origine (Postman, mobile)
+        if (!origin) return callback(null, true);
+        
+        // Autoriser localhost
+        if (origin.startsWith('http://localhost')) {
+            return callback(null, true);
+        }
+        
+        // Autoriser TOUS les domaines *.vercel.app
+        if (origin.endsWith('.vercel.app')) {
+            return callback(null, true);
+        }
+
+        // Bloquer tout le reste
+        callback(new Error('CORS non autorisé'));
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
