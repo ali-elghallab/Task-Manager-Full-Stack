@@ -1,6 +1,7 @@
 // src/components/TaskModal.jsx
-import { useState, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import api from "../services/api";
+import AuthContext from "../context/AuthContext";
 
 export default function TaskModal({ task, onClose, onSaved }) {
     const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ export default function TaskModal({ task, onClose, onSaved }) {
     });
     const [loading, setLoading] = useState(false);
     const [error, setError]     = useState("");
+    const {token} = useContext(AuthContext);
 
     // Remplir le formulaire avec les données de la tâche
     useEffect(() => {
@@ -37,7 +39,15 @@ export default function TaskModal({ task, onClose, onSaved }) {
 
         setLoading(true);
         try {
-            await api.put(`/tasks/${task.id}`, formData);
+            await api.put(
+                `/tasks/${task.id}`,
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
             onSaved();   // rafraîchit la liste
             onClose();   // ferme le modal
         } catch (err) {

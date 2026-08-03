@@ -14,7 +14,7 @@ export default function Header() {
 
     return (
         <header className="bg-[#1e2130] border-b border-[#2d3148]">
-            <div className="max-w-6xl mx-auto px-4 h-16
+            <div className="max-w-7xl mx-auto px-4 h-16
                             flex items-center justify-between">
 
                 {/* Logo */}
@@ -30,7 +30,7 @@ export default function Header() {
                             <path d="m9 12 2 2 4-4"/>
                         </svg>
                     </div>
-                    <span className="text-sm font-semibold text-slate-100">
+                    <span className="text-xl font-semibold text-slate-100">
                         Task Manager
                     </span>
                 </Link>

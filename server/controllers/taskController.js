@@ -55,12 +55,14 @@ const editTask = async(req, res) => {
             status,
             priority
         } = req.body;
+        const userId = req.user.id;
         await updateTask(
             taskId,
             title,
             description,
             status,
-            priority
+            priority,
+            userId
         );
         res.status(200).json({
             message: "Task updated"

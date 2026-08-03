@@ -154,7 +154,7 @@ function DashboardStats({ tasks }) {
                 {stats.total > 0 && (
                     <div className="bg-[#1e2130] border border-[#2d3148] rounded-xl p-4">
                         <div className="flex items-center justify-between mb-2">
-                            <p className="text-xs font-medium text-slate-300">
+                            <p className="text-xl font-medium text-slate-300">
                                 Progression globale
                             </p>
                             <p className="text-xs font-medium text-slate-300">
@@ -171,7 +171,7 @@ function DashboardStats({ tasks }) {
                         </div>
 
                         {/* Légende */}
-                        <div>
+                        <div className="flex flex-1 gap-6 mt-2">
                             <span className="flex items-center gap-1.5 text-xs text-slate-500">
                                 <span className="w-2 h-2 rounded-full bg-slate-600"/>
                                 À faire : {stats.todo}

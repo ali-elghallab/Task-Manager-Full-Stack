@@ -1,34 +1,35 @@
+import { Link } from "react-router-dom";
 export default function Footer() {
     return (
         <footer className="bg-[#1e2130] border-t border-[#2d3148] mt-auto">
-            <div className="max-w-6xl mx-auto px-4 py-6
+            <div className="max-w-7xl mx-auto px-4 py-6
                             flex flex-col sm:flex-row items-center
                             justify-between gap-4">
 
                 {/* Logo + texte */}
-                <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 bg-indigo-500 rounded-md
+                <Link to="/" className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 bg-indigo-500 rounded-md
                                     flex items-center justify-center">
                         <svg width="12" height="12" viewBox="0 0 24 24"
                             fill="none" stroke="white" strokeWidth="2"
                             strokeLinecap="round" strokeLinejoin="round">
                             <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0
-                                     002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
+                                    002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
                             <rect x="9" y="3" width="6" height="4" rx="1"/>
                             <path d="m9 12 2 2 4-4"/>
                         </svg>
                     </div>
-                    <span className="text-xs text-slate-500">
-                        Task Manager — Projet Portfolio
+                    <span className="text-xl font-semibold text-slate-100">
+                        Task Manager
                     </span>
-                </div>
+                </Link>
 
                 {/* Liens */}
                 <div className="flex items-center gap-4">
                     <a href="https://github.com/ali-elghallab/Task-Manager-Full-Stack"
                         target="_blank"
                         rel="noreferrer"
-                        className="text-xs text-slate-500 hover:text-slate-300
+                        className="text-xs text-slate-400 hover:text-slate-300
                                    transition-colors flex items-center gap-1.5">
                         <svg width="13" height="13" viewBox="0 0 24 24"
                             fill="currentColor">
@@ -52,17 +53,17 @@ export default function Footer() {
                         </svg>
                         GitHub
                     </a>
-                    <a href="https://linkedin.com/in/ton-linkedin"
+                    <a href="https://linkedin.com/in/ali-el-ghallab"
                         target="_blank"
                         rel="noreferrer"
-                        className="text-xs text-slate-500 hover:text-slate-300
+                        className="text-xs text-slate-400 hover:text-slate-300
                                    transition-colors">
                         LinkedIn
                     </a>
                 </div>
 
                 {/* Copyright */}
-                <p className="text-xs text-slate-600">
+                <p className="text-xs text-slate-400">
                     © 2026 Ali El Ghallab
                 </p>
             </div>

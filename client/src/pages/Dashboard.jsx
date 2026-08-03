@@ -116,7 +116,8 @@ function Dashboard() {
 
     return (
         <Layout>
-            {/* ← Modal — s'affiche par dessus tout */}
+
+            {/* Modal modification */}
             <TaskModal
                 task={modalTask}
                 onClose={() => setModalTask(null)}
@@ -124,10 +125,9 @@ function Dashboard() {
             />
 
             <div className="min-h-screen bg-[#0f1117]">
+                <div className="max-w-7xl mx-auto px-4 py-8">
 
-                <div className="max-w-6xl mx-auto px-4 py-8">
-
-                    {/* Header */}
+                    {/* ── Header ───────────────────────────────── */}
                     <div className="mb-8">
                         <h1 className="text-2xl font-semibold text-slate-100">
                             Tableau de bord
@@ -137,119 +137,146 @@ function Dashboard() {
                         </p>
                     </div>
 
-                    {/* Stats */}
-                    <div className="mb-8">
-                        <DashboardStats tasks={tasks}/> 
-                    </div>
+                    
 
-                    <div className="mb-8">
-                        <TaskCharts tasks={tasks}/>
-                    </div>
+                    {/* ── Layout 2 colonnes ─────────────────────── */}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-                    {/* Formulaire */}
-                    <div className="mb-8">
-                        <TaskForm 
-                            onTaskCreated={getTasks}
-                        />
-                    </div>
+                        {/* ── Colonne gauche (2/3) ──────────────── */}
+                        <div className="lg:col-span-2 flex flex-col gap-6">
+                            
+                            {/* ── Stats (pleine largeur) ────────────────── */}
+                            <div className="mb-6">
+                                <DashboardStats tasks={tasks}/>
+                            </div>
 
-                    {/* Barre de recherche + filtres */}
-                    <div className="flex flex-col sm:flex-row gap-3 mb-6">
-                        
-                        {/* Recherche */}
-                        <div className="relative flex-1">
-                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <circle cx="11" cy="11" r="8"/>
-                                    <path d="m21 21-4.35-4.35"/>
-                                </svg>
-                            </span>
+                            {/* Recherche + Filtres */}
+                            <div className="bg-[#1e2130] border border-[#2d3148]
+                                            rounded-xl p-4">
+                                <div className="flex flex-col sm:flex-row gap-3">
 
-                            <input 
-                                type="text" 
-                                placeholder="Rechercher une tache..."
-                                value={search}
-                                onChange={(e) => setSearch(e.target.value)}
-                                className="w-full bg-[#1e2130] border border-[#2d3148] rounded-lg pl-9 pr-4 py-2 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-indigo-500 transition-colors"
-                            />
+                                    {/* Recherche */}
+                                    <div className="relative flex-1">
+                                        <span className="absolute left-3 top-1/2
+                                                         -translate-y-1/2 text-slate-500">
+                                            <svg width="15" height="15"
+                                                viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" strokeWidth="1.5"
+                                                strokeLinecap="round" strokeLinejoin="round">
+                                                <circle cx="11" cy="11" r="8"/>
+                                                <path d="m21 21-4.35-4.35"/>
+                                            </svg>
+                                        </span>
+                                        <input
+                                            type="text"
+                                            placeholder="Rechercher une tâche..."
+                                            value={search}
+                                            onChange={(e) => setSearch(e.target.value)}
+                                            className="w-full bg-[#0f1117] border border-[#2d3148]
+                                                       rounded-lg pl-9 pr-4 py-2 text-sm
+                                                       text-slate-100 placeholder-slate-600
+                                                       focus:outline-none focus:border-indigo-500
+                                                       transition-colors"
+                                        />
+                                    </div>
+
+                                    {/* Filtre statut */}
+                                    <select
+                                        value={statusFilter}
+                                        onChange={(e) => setStatusFilter(e.target.value)}
+                                        className={selectClass}>
+                                        <option value="Tous">Tous les statuts</option>
+                                        <option value="À faire">À faire</option>
+                                        <option value="En cours">En cours</option>
+                                        <option value="Terminée">Terminée</option>
+                                    </select>
+
+                                    {/* Tri */}
+                                    <select
+                                        value={sortBy}
+                                        onChange={(e) => setSortBy(e.target.value)}
+                                        className={selectClass}>
+                                        <option value="none">Aucun tri</option>
+                                        <option value="a->z">A → Z</option>
+                                        <option value="z->a">Z → A</option>
+                                        <option value="priorityHigh">Priorité ↓</option>
+                                        <option value="priorityLow">Priorité ↑</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            {/* Compteur résultats */}
+                            <div className="flex items-center justify-between -mt-2 px-1">
+                                <p className="text-xs text-slate-500">
+                                    {sortedTasks.length === 0
+                                        ? "Aucune tâche trouvée"
+                                        : `${sortedTasks.length} tâche${sortedTasks.length > 1 ? "s" : ""}`
+                                    }
+                                </p>
+                                {statusFilter !== "Tous" && (
+                                    <button
+                                        onClick={() => setStatusFilter("Tous")}
+                                        className="text-xs text-indigo-400 hover:text-indigo-300
+                                                   flex items-center gap-1 transition-colors">
+                                        {statusFilter} ✕
+                                    </button>
+                                )}
+                            </div>
+
+                            {/* Liste des tâches */}
+                            {loading ? (
+                                <div className="flex items-center justify-center py-20">
+                                    <p className="text-slate-400 text-sm">
+                                        Chargement...
+                                    </p>
+                                </div>
+                            ) : sortedTasks.length === 0 ? (
+                                <div className="flex flex-col items-center
+                                                justify-center py-20 text-center
+                                                bg-[#1e2130] border border-[#2d3148]
+                                                rounded-xl">
+                                    <div className="w-12 h-12 bg-[#0f1117] border
+                                                    border-[#2d3148] rounded-xl
+                                                    flex items-center justify-center mb-4">
+                                        <svg width="20" height="20" viewBox="0 0 24 24"
+                                            fill="none" stroke="currentColor"
+                                            strokeWidth="1.5" className="text-slate-500"
+                                            strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0
+                                                     002 2h10a2 2 0 002-2V7a2 2 0
+                                                     00-2-2h-2"/>
+                                            <rect x="9" y="3" width="6" height="4" rx="1"/>
+                                        </svg>
+                                    </div>
+                                    <p className="text-slate-400 text-sm font-medium">
+                                        Aucune tâche trouvée
+                                    </p>
+                                    <p className="text-slate-600 text-xs mt-1">
+                                        Créez votre première tâche →
+                                    </p>
+                                </div>
+                            ) : (
+                                <TaskList
+                                    tasks={sortedTasks}
+                                    onEdit={handleEdit}
+                                    onDelete={deleteTask}
+                                />
+                            )}
                         </div>
 
-                        {/* Filtre statut */}
-                        <select
-                            value={statusFilter}
-                            onChange={(e) => setStatusFilter(e.target.value)}
-                            className={selectClass}
-                        >
-                            <option value="Tous">
-                                Tous
-                            </option>
-                            <option value="À faire">
-                                À faire
-                            </option>
-                            <option value="En cours">
-                                En cours
-                            </option>
-                            <option value="Terminée">
-                                Terminée
-                            </option>
-                        </select>
+                        {/* ── Colonne droite (1/3) ──────────────── */}
+                        <div className="flex flex-col gap-6">
 
-                        {/* Tri */}
-                        <select
-                            value={sortBy}
-                            onChange={(e) => setSortBy(e.target.value)}
-                            className={selectClass}
-                        >
-                            <option value="none">
-                                Aucun tri
-                            </option>
-                            <option value="a->z">
-                                Titre (A &rarr; Z)
-                            </option>
-                            <option value="z->a">
-                                Titre (Z &rarr; A)
-                            </option>
-                            <option value="priorityHigh">
-                                Priorité (Haute &rarr; Faible)
-                            </option>
-                            <option value="priorityLow">
-                                Priorité (Faible &rarr; Haute)
-                            </option>
-                        </select>
+                            {/* Formulaire nouvelle tâche */}
+                            <TaskForm onTaskCreated={getTasks}/>
 
+                            {/* Graphiques */}
+                            <TaskCharts tasks={tasks}/>
+
+                        </div>
                     </div>
-
                 </div>
-        
-                {/* Liste des tâches */}
-                {loading ? (
-                    <div className="flex items-center justify-center py-20">
-                        <p className="text-slate-400 text-sm">Chargement...</p>
-                    </div>
-                ) : sortedTasks.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center py-20 text-center">
-                        <div className="w-12 h-12 bg-[#1e2130] border border-[#2d3148] rounded-xl flex items-center justify-center mb-4">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-slate-500" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
-                                <rect x="9" y="3" width="6" height="4" rx="1"/>
-                            </svg>
-                        </div>
-                        <p className="text-slate-400 text-sm font-medium">
-                            Aucune tâche trouvée
-                        </p>
-                        <p className="text-slate-600 text-xs mt-1">
-                            Créez votre première tâche ci-dessus
-                        </p>
-                    </div>
-                ) : (
-                    <TaskList
-                        tasks={sortedTasks}
-                        onEdit={handleEdit}
-                        onDelete={deleteTask}
-                    />
-                )}        
             </div>
-            
         </Layout>
     );
 }

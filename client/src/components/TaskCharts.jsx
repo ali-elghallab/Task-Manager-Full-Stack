@@ -151,23 +151,7 @@ export default function TaskCharts({ tasks }) {
     }
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-            {/* Donut — Statuts */}
-            <div className="bg-[#1e2130] border border-[#2d3148]
-                            rounded-xl p-5">
-                <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-sm font-medium text-slate-100">
-                        Statuts
-                    </h3>
-                    <span className="text-xs text-slate-500">
-                        {tasks.length} tâche{tasks.length > 1 ? 's' : ''}
-                    </span>
-                </div>
-                <div className="max-w-[220px] mx-auto">
-                    <Doughnut data={donutData} options={donutOptions} />
-                </div>
-            </div>
+        <div className="grid grid-cols-1 gap-4">
 
             {/* Bar — Priorités */}
             <div className="bg-[#1e2130] border border-[#2d3148]
@@ -184,6 +168,24 @@ export default function TaskCharts({ tasks }) {
                 </div>
                 <Bar data={barData} options={barOptions} />
             </div>
+            
+            {/* Donut — Statuts */}
+            <div className="bg-[#1e2130] border border-[#2d3148]
+                            rounded-xl p-5">
+                <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-sm font-medium text-slate-100">
+                        Statuts
+                    </h3>
+                    <span className="text-xs text-slate-500">
+                        {tasks.length} tâche{tasks.length > 1 ? 's' : ''}
+                    </span>
+                </div>
+                <div className="max-w-[220px] mx-auto">
+                    <Doughnut data={donutData} options={donutOptions} />
+                </div>
+            </div>
+
+            
 
         </div>
     );
