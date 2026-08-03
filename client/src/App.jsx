@@ -4,6 +4,7 @@ import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import ProtectedRoute from './components/protectedRoute.jsx'
+import HomePage from './pages/HomePage.jsx'
 
 function App() {
   return (
@@ -11,23 +12,20 @@ function App() {
       <Routes>
         <Route 
           path='/'
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
+          element={<HomePage />}
         />
-
+        <Route 
+          path='/home'
+          element={<HomePage />}
+        />
         <Route 
           path='/login'
           element={<Login />}
         />
-
         <Route 
           path='/register'
           element={<Register />}
         />
-
         <Route 
           path='/dashboard'
           element={

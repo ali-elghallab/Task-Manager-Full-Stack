@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import api from "../services/api";
 import AuthContext from "../context/AuthContext";
 
-function TaskForm({ onTaskCreated, editingTask, setEditingTask }){
+function TaskForm({ onTaskCreated }){
 
     const { token } = useContext(AuthContext);            
             /*Cette ligne récuplère le JWT.
@@ -20,21 +20,12 @@ function TaskForm({ onTaskCreated, editingTask, setEditingTask }){
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
-    useEffect(() => {
-        if(editingTask){
-            setTitle(editingTask.title);
-            setDescription(editingTask.description);
-            setStatus(editingTask.status);
-            setPriority(editingTask.priority);
-        }
-    }, [editingTask]);
 
     function resetForm() {
         setTitle("");
         setDescription("");
         setStatus("À faire");
         setPriority("Moyenne");
-        setEditingTask(null);
         setError("");
     }
 
@@ -51,38 +42,20 @@ function TaskForm({ onTaskCreated, editingTask, setEditingTask }){
 
 
         try{
-            
-            if(editingTask){
-                await api.put(
-                    `/tasks/${editingTask.id}`,
-                    {
-                        title,
-                        description,
-                        status,
-                        priority
-                    },
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
+            await api.post(
+                "/tasks",
+                {
+                    title,
+                    description,
+                    status,
+                    priority
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
                     }
-                );
-            } else {
-                await api.post(
-                    "/tasks",
-                    {
-                        title,
-                        description,
-                        status,
-                        priority
-                    },
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    }
-                );
-            }
+                }
+            );
 
             console.log("Tâche créée");
             onTaskCreated();   // rafraîchit la liste dans Dashboard
@@ -122,25 +95,12 @@ function TaskForm({ onTaskCreated, editingTask, setEditingTask }){
             <div className="flex items-center justify-between mb-5">
                 <div>
                     <h2 className="text-base font-medium text-slate-100">
-                        {editingTask ? "Modifier la tâche" : "Nouvelle tâche"}
+                        Nouvelle tâche
                     </h2>
                     <p className="text-xs text-slate-500 mt-0.5">
-                        {editingTask
-                            ? "Modifiez les informations de la tâche"
-                            : "Remplissez les informations pour créer une tâche"
-                        }
+                        Remplissez les informations pour créer une tâche
                     </p>
                 </div>
-                
-                {/* Bouton annuler visible seulement en mode édition */}
-                {editingTask && (
-                    <button 
-                        type="button"
-                        onClick={resetForm}
-                        className="text-xs text-slate-500 hover:text-slate-300 border border-[#2d3148] hover:border-slate-500 px-3 py-1.5 rounded-lg transition-colors">
-                        Annuler
-                    </button>
-                )}
             </div>
 
             {/* Erreur */}
@@ -237,14 +197,6 @@ function TaskForm({ onTaskCreated, editingTask, setEditingTask }){
                     className="w-full bg-indigo-500 hover:bg-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-2.5 rounded-lg text-sm transition-colors flex items-center justify-center gap-2 mt-2">
                     {loading ? (
                         "En cours..."
-                    ) : editingTask ? (
-                        <>
-                            <svg width="14" height="14" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M20 6 9 17l-5-5"/>
-                            </svg>
-                            Enregistrer les modifications
-                        </>
                     ) : (
                         <>
                             <svg width="14" height="14" viewBox="0 0 24 24"
