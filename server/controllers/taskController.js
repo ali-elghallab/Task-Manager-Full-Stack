@@ -77,7 +77,8 @@ const editTask = async(req, res) => {
 const removeTask = async(req, res) => {
     try{
         const taskId = req.params.id;
-        await deleteTask(taskId);
+        const userId = req.user.id;
+        await deleteTask(taskId, userId);
         res.status(200).json({
             message: "Task deleted"
         });
