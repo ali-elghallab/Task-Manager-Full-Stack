@@ -5,6 +5,7 @@ import DashboardStats from "../components/DashboardStats";
 import api from "../services/api";
 import Layout from "../components/Layout";
 import TaskModal from "../components/TaskModal";
+import TaskCharts from "../components/TaskCharts";
 
 function Dashboard() {
     const [tasks, setTasks] = useState([]);  //Au départ: tasks = []
@@ -139,6 +140,10 @@ function Dashboard() {
                     {/* Stats */}
                     <div className="mb-8">
                         <DashboardStats tasks={tasks}/> 
+                    </div>
+
+                    <div className="mb-8">
+                        <TaskCharts tasks={tasks}/>
                     </div>
 
                     {/* Formulaire */}
