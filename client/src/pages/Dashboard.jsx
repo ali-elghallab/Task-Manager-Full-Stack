@@ -6,6 +6,7 @@ import api from "../services/api";
 import Layout from "../components/Layout";
 import TaskModal from "../components/TaskModal";
 import TaskCharts from "../components/TaskCharts";
+import DeleteModal from "../components/DeleteModal";
 
 function Dashboard() {
     const [tasks, setTasks] = useState([]);  //Au départ: tasks = []
@@ -14,6 +15,8 @@ function Dashboard() {
     const [statusFilter, setStatusFilter] = useState("Tous");
     const [sortBy, setSortBy] = useState("none");
     const [loading, setLoading] = useState(false);
+    const [deleteTask, setDeleteTask] = useState(null);
+    const [deleteLoading, setDeleteLoading] = useState(false);
 
     
 
@@ -48,30 +51,20 @@ function Dashboard() {
         setModalTask(task);
     }
 
-    async function deleteTask(id){
+    function handleDeleteClick(task) {
+        setDeleteTask(task);   // ouvre le modal
+    }
 
-        const confirmDelete = window.confirm("Voulez-vous supprimmer cette tache ?");
-        
-        if(!confirmDelete){
-            return;
-        }
-
-        try{
-            const token = localStorage.getItem("token");
-            await api.delete(
-                `/tasks/${id}`,
-                {
-                    headers:{
-                        Authorization:`Bearer ${token}`
-                    }
-                }
-            );
-
+    async function confirmDelete() {
+        setDeleteLoading(true);
+        try {
+            await api.delete(`/tasks/${deleteTask.id}`);
+            setDeleteTask(null);
             getTasks();
-            
-        }
-        catch(error){
+        } catch (error) {
             console.log(error);
+        } finally {
+            setDeleteLoading(false);
         }
     }
 
@@ -122,6 +115,13 @@ function Dashboard() {
                 task={modalTask}
                 onClose={() => setModalTask(null)}
                 onSaved={getTasks}
+            />
+
+            <DeleteModal
+                task={deleteTask}
+                onClose={() => setDeleteTask(null)}
+                onConfirm={confirmDelete}
+                loading={deleteLoading}
             />
 
             <div className="min-h-screen bg-[#0f1117]">
@@ -259,7 +259,7 @@ function Dashboard() {
                                 <TaskList
                                     tasks={sortedTasks}
                                     onEdit={handleEdit}
-                                    onDelete={deleteTask}
+                                    onDelete={(task) => handleDeleteClick(task)}
                                 />
                             )}
                         </div>

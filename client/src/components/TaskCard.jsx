@@ -75,7 +75,7 @@ function TaskCard({ task, onEdit, onDelete }){
 
             {/* Supprimer */}
             <button 
-                onClick={() => onDelete(task.id)}
+                onClick={() => onDelete(task)}
                 className="flex-1 flex items-center justify-center gap-1.5 text-xs text-slate-400 hover:text-red-400 bg-transparent hover:bg-red-500/10 border border-[#2d3148] hover:border-red-500/30 px-3 py-2 rounded-lg transition-all duration-200">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="3 6 5 6 21 6"/>
